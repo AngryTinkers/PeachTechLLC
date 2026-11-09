@@ -2,7 +2,8 @@ import nodemailer from "nodemailer";
 import { jobs } from "@/lib/jobs";
 import { site } from "@/lib/site";
 
-const MAX_BYTES = 5 * 1024 * 1024;
+// Vercel caps function request bodies at 4.5 MB, so keep files under that.
+const MAX_BYTES = 4 * 1024 * 1024;
 const ALLOWED = {
   "application/pdf": ".pdf",
   "application/msword": ".doc",
@@ -68,7 +69,7 @@ export async function POST(request: Request) {
   if (profileUrl && !/^https?:\/\//i.test(profileUrl)) return bad("Profile URL must start with http:// or https://");
   if (!consent) return bad("Please accept the consent checkbox.");
   if (!(resume instanceof File) || resume.size === 0) return bad("Please attach your resume.");
-  if (resume.size > MAX_BYTES) return bad("Your resume must be 5 MB or smaller.");
+  if (resume.size > MAX_BYTES) return bad("Your resume must be 4 MB or smaller.");
 
   const ext = resume.name.toLowerCase().match(/\.(pdf|docx?)$/)?.[0];
   const typeOk = resume.type in ALLOWED || resume.type === "" || resume.type === "application/octet-stream";

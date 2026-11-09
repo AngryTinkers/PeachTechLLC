@@ -84,7 +84,7 @@ export const careersFaq = [
   },
   {
     q: "How do I apply for a job at PeachTech?",
-    a: "Open the Careers page, choose a role (or 'General application'), and submit your full name, email, phone number and resume (PDF, DOC or DOCX, up to 5 MB). Our recruiting team reviews every application.",
+    a: "Open the Careers page, choose a role (or 'General application'), and submit your full name, email, phone number and resume (PDF, DOC or DOCX, up to 4 MB). Our recruiting team reviews every application.",
   },
   {
     q: "What does the PeachTech hiring process look like?",

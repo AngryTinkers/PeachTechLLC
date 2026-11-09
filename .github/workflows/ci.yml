@@ -1,0 +1,41 @@
+# Continuous integration: lint and build (with type-check) on every push and PR.
+# Deployment (CD) is handled by Vercel's GitHub integration:
+#   - push to main        -> production deploy (your domain)
+#   - push to other branches / PRs -> preview deploy with its own URL
+# Mark the "build" check as required in GitHub branch protection so broken
+# code can't be merged into main.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+      SITE_URL: https://example.com
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build (includes TypeScript type-check)
+        run: npm run build

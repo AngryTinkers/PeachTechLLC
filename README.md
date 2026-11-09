@@ -25,7 +25,7 @@ Production: `npm run build && npm start`. Pages are prerendered, so **rebuild af
 
 ## Job applications
 
-The apply form (`/careers#apply` and each `/careers/[slug]` page) posts to `src/app/api/apply/route.ts`, which validates the input and emails the application, with the resume attached (PDF/DOC/DOCX, max 5 MB), to `APPLY_TO_EMAIL` (or `CAREERS_EMAIL`) over SMTP. Set `APPLY_SEND_CONFIRMATION=true` to also send the applicant an acknowledgement. It includes a honeypot field and a simple per-IP rate limit.
+The apply form (`/careers#apply` and each `/careers/[slug]` page) posts to `src/app/api/apply/route.ts`, which validates the input and emails the application, with the resume attached (PDF/DOC/DOCX, max 4 MB), to `APPLY_TO_EMAIL` (or `CAREERS_EMAIL`) over SMTP. Set `APPLY_SEND_CONFIRMATION=true` to also send the applicant an acknowledgement. It includes a honeypot field and a simple per-IP rate limit.
 
 ## SEO and AEO (AI search)
 

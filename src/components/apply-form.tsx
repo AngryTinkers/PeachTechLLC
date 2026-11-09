@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState, type FormEvent } from "react";
 import { Icon } from "./icons";
 
-const MAX_MB = 5;
+const MAX_MB = 4;
 const ACCEPT = ".pdf,.doc,.docx";
 
 type Status = { state: "idle" } | { state: "sending" } | { state: "success" } | { state: "error"; message: string };
